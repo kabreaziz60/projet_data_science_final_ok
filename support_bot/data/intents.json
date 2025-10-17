@@ -1,0 +1,19 @@
+{
+  "intents": [
+    {
+      "tag": "salutation",
+      "patterns": ["Bonjour", "Salut", "Hey", "Coucou"],
+      "responses": ["Bonjour! Comment puis-je vous aider avec votre support technique ?", "Salut! En quoi puis-je vous être utile aujourd'hui?"]
+    },
+    {
+      "tag": "bug_courant",
+      "patterns": ["Mon logiciel ne démarre pas", "J'ai un bug", "Comment réparer une erreur de lancement?"],
+      "responses": ["Veuillez essayer de redémarrer votre ordinateur et de vérifier si le logiciel est à jour.", "Avez-vous essayé de réinstaller le programme? Quelle est l'erreur exacte que vous voyez ?"]
+    },
+    {
+      "tag": "installation_programme",
+      "patterns": ["Comment installer un programme", "Étapes pour l'installation", "Où trouver le fichier d'installation?"],
+      "responses": ["En général, vous téléchargez l'exécutable (.exe ou .dmg) depuis le site officiel, puis vous double-cliquez dessus et suivez les instructions.", "Quel programme essayez-vous d'installer ?"]
+    }
+  ]
+}
