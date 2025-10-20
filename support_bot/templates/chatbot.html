@@ -1,0 +1,95 @@
+{% load static %}
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Support — Chatbot</title>
+  <link rel="stylesheet" href="{% static 'chat.css' %}">
+</head>
+<body>
+  <div id="chat-widget" class="chat-closed" aria-live="polite">
+    <div class="chat-header" id="chatHeader">
+      <div class="brand">
+        <img src="{% static 'logo.png' %}" alt="Logo" class="brand-logo" onerror="this.style.display='none'">
+        <div class="brand-title">
+          <span class="title-main">SUPPORT TIC</span>
+          <small class="title-sub">Assistance & Formation</small>
+        </div>
+      </div>
+      <button id="chatToggle" class="toggle-btn" aria-expanded="false">▶</button>
+    </div>
+
+    <div class="chat-body" id="chatBody" hidden>
+      <div class="chat-conversation" id="conversation" role="log"></div>
+
+      <div class="quick-actions" id="quickActions">
+        <button class="qa-btn">Dépannage PC</button>
+        <button class="qa-btn">Installation logiciel</button>
+        <button class="qa-btn">Accès Wi-Fi</button>
+      </div>
+
+      <form id="chatForm" class="chat-form" autocomplete="off">
+        <input id="messageInput" class="chat-input" type="text" name="question" placeholder="Tapez votre question..." aria-label="Message">
+        <button type="submit" class="send-btn">Envoyer</button>
+      </form>
+
+      <div class="small-print">Disponible : 7j/7 - 24h/24</div>
+    </div>
+  </div>
+
+  <script>
+    function getCookie(name) {
+      let v = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const c = cookies[i].trim();
+          if (c.substring(0, name.length + 1) === (name + '=')) {
+            v = decodeURIComponent(c.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return v;
+    }
+
+    const CSRFTOKEN = getCookie('csrftoken');
+
+    document.getElementById('chatForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const messageInput = document.getElementById('messageInput');
+      const message = messageInput.value.trim();
+      if (!message) return;
+
+      fetch('/api/ask/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-CSRFToken': CSRFTOKEN
+        },
+        body: `message=${encodeURIComponent(message)}`
+      })
+      .then(res => res.json())
+      .then(data => {
+        const conv = document.getElementById('conversation');
+        const userMsg = `<div class="user-msg">${message}</div>`;
+        const botMsg = `<div class="bot-msg">${data.response}</div>`;
+        conv.innerHTML += userMsg + botMsg;
+        conv.scrollTop = conv.scrollHeight;
+        messageInput.value = '';
+      });
+    });
+
+    document.getElementById('chatToggle').addEventListener('click', function() {
+      const body = document.getElementById('chatBody');
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      body.hidden = expanded;
+      this.setAttribute('aria-expanded', !expanded);
+      document.getElementById('chat-widget').classList.toggle('chat-closed');
+    });
+  </script>
+
+  <script src="{% static 'chat.js' %}"></script>
+</body>
+</html>

@@ -1,24 +1,17 @@
-# support_bot/views.py
-
 from django.shortcuts import render
 from django.http import JsonResponse
-from .chatbot_engine import get_response # Importez notre logique
+from django.views.decorators.csrf import csrf_exempt
+from .chatbot_engine import get_chatbot_response
 
+# Vue pour afficher la page HTML du chatbot
 def chatbot_page(request):
-    """Affiche la page du chatbot."""
-    return render(request, 'support_bot/chatbot.html')
+    return render(request, 'chatbot.html')
 
-def get_chatbot_response(request):
-    """Vue API pour obtenir une réponse du chatbot."""
+# Vue API pour recevoir les requêtes POST et renvoyer une réponse JSON
+@csrf_exempt
+def chatbot_api(request):
     if request.method == 'POST':
-        # Récupérer le message de l'utilisateur envoyé par AJAX
-        user_message = request.POST.get('message', '') 
-
-        # Obtenir la réponse du moteur
-        bot_response = get_response(user_message)
-
-        # Retourner la réponse au format JSON
-        return JsonResponse({'message': bot_response})
-
-    # Pour toute autre méthode, renvoyer une erreur simple
+        user_input = request.POST.get('message', '')
+        response = get_chatbot_response(user_input)
+        return JsonResponse({'response': response})
     return JsonResponse({'error': 'Méthode non autorisée'}, status=405)
