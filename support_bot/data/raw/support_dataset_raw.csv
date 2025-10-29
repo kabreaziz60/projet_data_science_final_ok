@@ -1,0 +1,271 @@
+source,titre,contenu
+https://support.microsoft.com/fr-fr/windows/r%C3%A9soudre-les-probl%C3%A8mes-de-connexion-wi-fi-dans-windows-9424a1f7-6a3b-65a6-4d78-7f07eee84d2c,Global,"Utiliser une eSIM pour obtenir Cellular Data
+Ajouter un appareil au forfait de données mobiles
+Résoudre des problèmes de partage à proximité
+Résoudre les problèmes de connectivité lors de la configuration
+Produits Microsoft 365 Outlook Microsoft Teams OneDrive Microsoft Copilot OneNote Windows plus...
+Appareils Surface Accessoires PC Xbox Jeux sur PC HoloLens Surface Hub Garanties matérielles
+Compte et facturation Compte Microsoft Store &facturation
+Ressources Nouveautés Forums de la communauté Administrateurs Microsoft 365 Portail petite entreprise Développeur Éducation Signaler une fraude au Support Sécurité du produit
+Tout Microsoft Global Microsoft 365 Teams Copilot Windows Surface Xbox Offres spéciales TPE & PME Support technique Logiciels Logiciels Applications Windows IA OneDrive Outlook Passage de Skype à Teams OneNote Microsoft Teams PC et appareils PC et appareils Découvrir la gamme Xbox Accessoires VR et réalité mixte Divertissement Divertissement Xbox Game Pass Ultimate Xbox et jeux Jeux PC Entreprises Entreprises Microsoft Cloud Sécurité Microsoft Azure Dynamics 365 Microsoft 365 pour les entreprises Microsoft Industry Microsoft Power Platform Windows 365 Développeurs & IT Développeurs & IT Développeur Microsoft Microsoft Learn Prise en charge des applications du marketplace d’IA Microsoft Tech Community Microsoft Marketplace Visual Studio Autres Autres Microsoft Rewards Téléchargements gratuits et pour la sécurité Éducation Cartes cadeaux Licences Vue plan de site
+Global Microsoft 365 Teams Copilot Windows Surface Xbox Offres spéciales TPE & PME Support technique
+Logiciels Logiciels Applications Windows IA OneDrive Outlook Passage de Skype à Teams OneNote Microsoft Teams
+PC et appareils PC et appareils Découvrir la gamme Xbox Accessoires VR et réalité mixte
+Divertissement Divertissement Xbox Game Pass Ultimate Xbox et jeux Jeux PC
+Entreprises Entreprises Microsoft Cloud Sécurité Microsoft Azure Dynamics 365 Microsoft 365 pour les entreprises Microsoft Industry Microsoft Power Platform Windows 365
+Développeurs & IT Développeurs & IT Développeur Microsoft Microsoft Learn Prise en charge des applications du marketplace d’IA Microsoft Tech Community Microsoft Marketplace Visual Studio
+Prise en charge des applications du marketplace d’IA
+Autres Autres Microsoft Rewards Téléchargements gratuits et pour la sécurité Éducation Cartes cadeaux Licences
+Téléchargements gratuits et pour la sécurité
+Utiliser une eSIM pour obtenir Cellular Data
+Ajouter un appareil au forfait de données mobiles
+Résoudre des problèmes de partage à proximité
+Résoudre les problèmes de connectivité lors de la configuration
+Si vous ne parvenez pas à accéder à la messagerie, à naviguer sur le web ou à diffuser de la musique, il est probable que vous n’êtes pas connecté à votre réseau et que vous ne puissiez pas accéder à Internet. Heureusement, la plupart des problèmes de connectivité peuvent être résolus avec des étapes de dépannage simples. Dans ce guide, nous allons explorer une gamme de solutions pour vous aider à résoudre Wi-Fi problèmes dans Windows, en fournissant des instructions claires et détaillées pour une résolution efficace des problèmes.
+Exécuter l’utilitaire de résolution des problèmes réseau
+Si vous utilisez un appareil Windows 11, commencez par exécuter l’utilitaire de résolution des problèmes réseau et Internet automatisé dans l’application Obtenir de l’aide. Il s’exécute automatiquement diagnostics et tente de résoudre la plupart des problèmes. Si vous utilisez une version antérieure de Windows ou un appareil mobile, passez directement aux étapes de dépannage générales .
+Exécuter l’utilitaire de résolution des problèmes dans Obtenir de l’aide
+Vous êtes connecté à Wi-Fi et à Internet. Tout devrait bien se passer. Si vous voyez cette icône mais que vous rencontrez toujours des problèmes de connectivité, le problème peut être spécifique à une application ou à un site web, ou lié à un pare-feu qui bloque votre connexion Internet.
+Remarque : Si vous voyez la barre de signal se déplacer vers le haut ou vers le bas, cela signifie que votre appareil est en train de se connecter au réseau Wi-Fi. Une fois qu’il cesse de se déplacer et affiche un niveau de connexion, vous êtes connecté.
+Vous êtes connecté à un réseau privé virtuel (VPN) reconnu. Pour en savoir plus, consultez Se connecter à un VPN dans Windows .
+Votre appareil n’a pas de connexion Internet. Concernant le Wi-Fi, cette icône peut apparaître pour une ou plusieurs raisons.
+Exécuter l’utilitaire de résolution des problèmes réseau
+Commencez par exécuter l’utilitaire de résolution des problèmes réseau automatisé dans l’application Paramètres. Il s’exécute automatiquement diagnostics et tente de résoudre la plupart des problèmes. Si vous utilisez une version antérieure de Windows ou un appareil mobile, passez directement aux étapes de dépannage générales .
+Sélectionnez Démarrer > Paramètres > Réseau et Internet.
+Sélectionnez Démarrer > Paramètres > Réseau et Internet.
+​​​​​​​ Sélectionnez État dans le menu de gauche.
+​​​​​​​ Sélectionnez État dans le menu de gauche.
+Faites défiler vers le bas et sélectionnez Utilitaire de résolution des problèmes réseau .
+Faites défiler vers le bas et sélectionnez Utilitaire de résolution des problèmes réseau .
+Une nouvelle fenêtre intitulée Résoudre les problèmes s’ouvre. Suivez les instructions à l’écran pour terminer le processus.
+Une nouvelle fenêtre intitulée Résoudre les problèmes s’ouvre. Suivez les instructions à l’écran pour terminer le processus.
+Vous êtes connecté à Wi-Fi et à Internet. Tout devrait bien se passer. Si vous voyez cette icône mais que vous rencontrez toujours des problèmes de connectivité, le problème peut être spécifique à une application ou à un site web, ou lié à un pare-feu qui bloque votre connexion Internet.
+Remarque : Si vous voyez la barre de signal se déplacer vers le haut ou vers le bas, cela signifie que votre appareil est en train de se connecter au réseau Wi-Fi. Une fois qu’il cesse de se déplacer et affiche un niveau de connexion, vous êtes connecté.
+Votre appareil n’a pas de connexion Internet. Concernant le Wi-Fi, cette icône peut apparaître pour une ou plusieurs raisons.
+Essayez les étapes de résolution des problèmes générales suivantes pour résoudre le problème Wi-Fi.
+Étape 1. Vérifier l’état de votre connexion réseau
+Sélectionnez les icônes Réseau , Son ou Batterie ( ) sur le côté droit de la barre des tâches.
+Sélectionnez les icônes Réseau , Son ou Batterie ( ) sur le côté droit de la barre des tâches.
+Vérifiez si le nom de votre réseau indique Connecté en dessous. S’il affiche un status autre que Connecté , sélectionnez un réseau Wi-Fi que vous reconnaissez dans la liste des réseaux disponibles. Ensuite, cliquez sur le réseau et essayez de vous connecter.
+Vérifiez si le nom de votre réseau indique Connecté en dessous. S’il affiche un status autre que Connecté , sélectionnez un réseau Wi-Fi que vous reconnaissez dans la liste des réseaux disponibles. Ensuite, cliquez sur le réseau et essayez de vous connecter.
+Accédez à Paramètres > le mode Réseau & Internet > Avion .
+Accédez à Paramètres > le mode Réseau & Internet > Avion .
+Vérifiez que le mode Avion est désactivé.
+Vérifiez que le mode Avion est désactivé.
+Étape 3. Oubliez et reconnectez-vous au réseau Wi-Fi
+Dans l’application Paramètres sur votre appareil Windows, sélectionnez Réseau & Internet > Wi-Fi , puis sélectionnez Gérer les réseaux connus .
+Dans l’application Paramètres sur votre appareil Windows, sélectionnez Réseau & Internet > Wi-Fi , puis sélectionnez Gérer les réseaux connus .
+Sélectionnez votre réseau Wi-Fi, puis cliquez sur Oublier .
+Sélectionnez votre réseau Wi-Fi, puis cliquez sur Oublier .
+Reconnectez-vous au réseau en le sélectionnant et en entrant le mot de passe.
+Reconnectez-vous au réseau en le sélectionnant et en entrant le mot de passe.
+Étape 4. Redémarrer votre modem et votre routeur sans fil
+Cela permet de créer une nouvelle connexion à votre fournisseur d’accès Internet (FAI). Lorsque vous effectuez cette opération, toutes les personnes connectées à votre réseau Wi-Fi sont temporairement déconnectées. Les étapes à suivre pour redémarrer votre modem et votre routeur peuvent varier, mais voici les étapes générales.
+Remarque : Si vous disposez d'un appareil combiné modem-câble/routeur Wi-Fi, vous ne devez suivre que les étapes relatives à l'appareil unique.
+Débranchez le câble d’alimentation du routeur de la source d’alimentation.
+Débranchez le câble d’alimentation du routeur de la source d’alimentation.
+Débranchez le câble d’alimentation du modem de la source d’alimentation. Certains modems sont dotés d’une batterie de secours. Si vous débranchez le modem et que les lumières restent allumées, retirez la batterie du modem.
+Débranchez le câble d’alimentation du modem de la source d’alimentation. Certains modems sont dotés d’une batterie de secours. Si vous débranchez le modem et que les lumières restent allumées, retirez la batterie du modem.
+Si vous avez retiré la batterie du modem, réinstallez-la. Rebranchez le modem sur la source d’alimentation. Les voyants sur le modem clignoteront. Patientez jusqu’à l’arrêt du clignotement.
+Si vous avez retiré la batterie du modem, réinstallez-la. Rebranchez le modem sur la source d’alimentation. Les voyants sur le modem clignoteront. Patientez jusqu’à l’arrêt du clignotement.
+Rebranchez le routeur à la source d’alimentation.
+Rebranchez le routeur à la source d’alimentation.
+Attendez que le modem et le routeur soient sous tension. Cela peut prendre quelques minutes. Vous pouvez généralement déterminer qu’ils sont prêts en consultant les voyants d’état de ces deux appareils.
+Attendez que le modem et le routeur soient sous tension. Cela peut prendre quelques minutes. Vous pouvez généralement déterminer qu’ils sont prêts en consultant les voyants d’état de ces deux appareils.
+Essayez de vous reconnecter sur votre PC.
+Essayez de vous reconnecter sur votre PC.
+Étape 5. Ajuster Wi-Fi canal et la fréquence
+Essayez de vous connecter à un réseau sur une autre bande de fréquences. De nombreux routeurs Wi-Fi grand public diffusent sur deux bandes de fréquence réseau différentes : 2,4 GHz et 5 GHz. Ceux-ci apparaissent en tant que réseaux distincts dans la liste des réseaux Wi-Fi disponibles. Si votre liste de réseaux Wi-Fi disponibles comprend à la fois un réseau 2,4 GHz et un réseau de 5 GHz, essayez de vous connecter à l’autre réseau. Pour en savoir plus, case activée wi-fi et votre disposition d’accueil .
+Étape 6. Essayez de vous connecter au même réseau sur un autre appareil
+Sur un autre ordinateur portable ou téléphone, essayez de vous connecter au même réseau. Si vous pouvez vous connecter, la source du problème est probablement due à votre appareil.
+Essayez d'exécuter ces commandes réseau pour réinitialiser manuellement la pile TCP/IP, libérer et renouveler l'adresse IP, et vider et réinitialiser le cache du résolveur du client DNS :
+Sélectionnez Rechercher dans la barre des tâches, puis tapez invite de commandes . Le bouton Invite de commandes s’affiche. À droite de celui-ci, sélectionnez Exécuter en tant qu'administrateur > Oui .
+Sélectionnez Rechercher dans la barre des tâches, puis tapez invite de commandes . Le bouton Invite de commandes s’affiche. À droite de celui-ci, sélectionnez Exécuter en tant qu'administrateur > Oui .
+Dans l’invite de commandes, exécutez les commandes suivantes dans l’ordre où elles apparaissent, puis vérifiez si cela résout le problème de connexion : Tapez netsh winsock reset et sélectionnez Entrée . Tapez netsh int ip reset et sélectionnez Entrée. Tapez ipconfig /release et sélectionnez Entrée. Tapez ipconfig /renew et sélectionnez Entrée. Tapez ipconfig /flushdns et sélectionnez Entrée.
+Dans l’invite de commandes, exécutez les commandes suivantes dans l’ordre où elles apparaissent, puis vérifiez si cela résout le problème de connexion :
+Tapez netsh winsock reset et sélectionnez Entrée .
+Tapez netsh winsock reset et sélectionnez Entrée .
+Tapez netsh int ip reset et sélectionnez Entrée.
+Tapez netsh int ip reset et sélectionnez Entrée.
+Tapez ipconfig /release et sélectionnez Entrée.
+Tapez ipconfig /release et sélectionnez Entrée.
+Tapez ipconfig /renew et sélectionnez Entrée.
+Tapez ipconfig /renew et sélectionnez Entrée.
+Tapez ipconfig /flushdns et sélectionnez Entrée.
+Tapez ipconfig /flushdns et sélectionnez Entrée.
+Étape 8 : Désinstaller le pilote de carte réseau et redémarrer
+Si les étapes précédentes n'ont pas fonctionné, essayez de désinstaller le pilote de la carte réseau, puis redémarrez votre ordinateur. Windows installera automatiquement le pilote le plus récent. Cette approche est conseillée si le problème de connexion réseau apparaît après une mise à jour récente.
+Avant toute désinstallation, assurez-vous que vous disposez de copies de sauvegarde des pilotes. Accédez au site web du fabricant de votre PC et téléchargez le dernier pilote disponible pour votre carte réseau. Si votre PC ne peut pas se connecter à Internet, vous devrez télécharger un pilote sur un autre PC et l'enregistrer sur une clé USB pour pouvoir l'installer sur votre PC. Vous aurez besoin du nom du fabricant du PC, ainsi que du nom ou du numéro du modèle.
+Sélectionnez Rechercher dans la barre des tâches, tapez Gestionnaire de périphériques , puis sélectionnez Gestionnaire de périphériques dans la liste des résultats.
+Sélectionnez Rechercher dans la barre des tâches, tapez Gestionnaire de périphériques , puis sélectionnez Gestionnaire de périphériques dans la liste des résultats.
+Développez Cartes réseau et recherchez la carte réseau de votre appareil.
+Développez Cartes réseau et recherchez la carte réseau de votre appareil.
+Sélectionnez la carte réseau, appuyez longuement (ou cliquez avec le bouton droit), puis sélectionnez Désinstaller l’appareil > case activée la zone Tentative de suppression du pilote pour ce périphérique case activée > Désinstaller .
+Sélectionnez la carte réseau, appuyez longuement (ou cliquez avec le bouton droit), puis sélectionnez Désinstaller l’appareil > case activée la zone Tentative de suppression du pilote pour ce périphérique case activée > Désinstaller .
+Après avoir désinstallé le pilote, sélectionnez Démarrer > Power > Redémarrer .
+Après avoir désinstallé le pilote, sélectionnez Démarrer > Power > Redémarrer .
+Une fois que votre PC a redémarré, Windows recherche et installe automatiquement le pilote de carte réseau. Vérifiez si cela résout le problème de connexion. Si Windows n’installe pas automatiquement le pilote, essayez d’installer le pilote de sauvegarde enregistré avant la désinstallation.
+Étape 9. Utiliser le test ping pour case activée en cas de problème avec Wi-Fi connexion au routeur
+Vérifiez s’il existe un problème avec la connexion à votre routeur Wi-Fi. Pour ce faire, utilisez un test ping.
+Dans la zone de recherche de la barre des tâches, tapez invite de commandes . Le bouton Invite de commandes s’affiche. À droite, sélectionnez Exécuter en tant qu’administrateur > Oui .
+Dans la zone de recherche de la barre des tâches, tapez invite de commandes . Le bouton Invite de commandes s’affiche. À droite, sélectionnez Exécuter en tant qu’administrateur > Oui .
+À l’invite de commandes, tapez ipconfig , puis sélectionnez Entrée . Recherchez le nom de votre réseau Wi-Fi dans les résultats, puis recherchez l’adresse IP répertoriée en regard de Passerelle par défaut pour ce réseau Wi-Fi. Notez cette adresse si nécessaire. Par exemple : 192.168.1.1
+À l’invite de commandes, tapez ipconfig , puis sélectionnez Entrée . Recherchez le nom de votre réseau Wi-Fi dans les résultats, puis recherchez l’adresse IP répertoriée en regard de Passerelle par défaut pour ce réseau Wi-Fi. Notez cette adresse si nécessaire. Par exemple : 192.168.1.1
+À l’invite, tapez ping <DefaultGateway> , puis sélectionnez Entrée . Par exemple, tapez ping 192.168.1.1 , puis sélectionnez Entrée . Les résultats doivent ressembler à ceci :
+À l’invite, tapez ping <DefaultGateway> , puis sélectionnez Entrée . Par exemple, tapez ping 192.168.1.1 , puis sélectionnez Entrée . Les résultats doivent ressembler à ceci :
+Reply from 192.168.1.1: bytes=32 time=5ms TTL=64
+Reply from 192.168.1.1: bytes=32 time=5ms TTL=64
+Reply from 192.168.1.1: bytes=32 time=5ms TTL=64
+Reply from 192.168.1.1: bytes=32 time=5ms TTL=64
+Reply from 192.168.1.1: bytes=32 time=5ms TTL=64
+Reply from 192.168.1.1: bytes=32 time=5ms TTL=64
+Reply from 192.168.1.1: bytes=32 time=5ms TTL=64
+Reply from 192.168.1.1: bytes=32 time=5ms TTL=64
+Ping statistics for 192.168.1.1: Packets: Sent = 4, Received = 4, Lost = 0 (0% loss), Approximate round trip times in milli-seconds: Minimum = 4ms, Maximum = 5ms, Average = 4ms
+Ping statistics for 192.168.1.1: Packets: Sent = 4, Received = 4, Lost = 0 (0% loss), Approximate round trip times in milli-seconds: Minimum = 4ms, Maximum = 5ms, Average = 4ms
+Si vous voyez des résultats comme celui-ci et que vous obtenez une réponse, vous disposez d’une connexion à votre routeur Wi-Fi. Il peut donc y avoir un problème avec votre modem ou votre fournisseur de services Internet. Contactez votre fournisseur de services Internet ou case activée en ligne sur un autre appareil (si vous le pouvez) pour voir s’il y a une panne de service.
+Si les résultats du test ping indiquent que vous n’obtenez pas de réponse du routeur, essayez de connecter votre PC directement à votre modem à l’aide d’un câble Ethernet (si possible). Si vous pouvez vous connecter à Internet à l’aide d’un câble Ethernet, cela confirme que le problème de connexion est dû au routeur Wi-Fi. Vérifiez que vous avez installé le microprogramme le plus récent et consultez la documentation de votre routeur.
+Étape 10. Désactiver l’économie d’énergie pour Wi-Fi adaptateur
+Ouvrez Gestionnaire de périphériques et développez Cartes réseau .
+Ouvrez Gestionnaire de périphériques et développez Cartes réseau .
+Cliquez avec le bouton droit sur votre adaptateur Wi-Fi et choisissez Propriétés .
+Cliquez avec le bouton droit sur votre adaptateur Wi-Fi et choisissez Propriétés .
+Accédez à l’onglet Gestion de l’alimentation.
+Accédez à l’onglet Gestion de l’alimentation.
+Décochez Autoriser l’ordinateur à éteindre cet appareil pour économiser l’alimentation .
+Décochez Autoriser l’ordinateur à éteindre cet appareil pour économiser l’alimentation .
+Étape 11. Recherchez les mises à jour Windows
+Sélectionnez Démarrer les paramètres >> Windows Update > Rechercher les mises à jour. Téléchargez et installez les nouvelles mises à jour.
+De nombreuses mises à jour nécessiteront le redémarrage de votre appareil. Enregistrez votre travail et fermez toutes les applications ouvertes. Ensuite, sélectionnez Démarrer > Power , puis sélectionnez Redémarrer .
+Étape 13. Utiliser la réinitialisation réseau
+La réinitialisation réseau est à utiliser en dernier recours. N’effectuez cette opération que si les étapes précédentes n’ont pas permis de résoudre le problème de connexion.
+Cela peut aider à résoudre les problèmes de connexion que vous pouvez rencontrer après la mise à niveau de Windows 10 à Windows 11. Il peut aussi aider à résoudre le problème où vous pouvez vous connecter à l'Internet mais ne pouvez pas vous connecter aux lecteurs réseau partagés. La réinitialisation du réseau supprime tous les adaptateurs réseau que vous avez installés et leurs paramètres. Une fois que votre PC a redémarré, toutes les cartes réseau sont réinstallées et les valeurs par défaut des paramètres associés sont rétablies.
+Sélectionnez le bouton Démarrer , puis entrez Paramètres . Sélectionnez Paramètres > Réseau & Internet ​​​​​​​ Dans Windows 11, sélectionnez Paramètres réseau avancés > Réinitialisation réseau . ​​​​​​​ Dans Windows 10, sélectionnez État > Réinitialisation du réseau.
+Sélectionnez le bouton Démarrer , puis entrez Paramètres . Sélectionnez Paramètres > Réseau & Internet
+​​​​​​​ Dans Windows 11, sélectionnez Paramètres réseau avancés > Réinitialisation réseau . ​​​​​​​
+​​​​​​​ Dans Windows 11, sélectionnez Paramètres réseau avancés > Réinitialisation réseau . ​​​​​​​
+Dans Windows 10, sélectionnez État > Réinitialisation du réseau.
+Dans Windows 10, sélectionnez État > Réinitialisation du réseau.
+Dans l’écran Réinitialisation réseau , sélectionnez Réinitialiser maintenant > Oui pour confirmer l’opération.
+Dans l’écran Réinitialisation réseau , sélectionnez Réinitialiser maintenant > Oui pour confirmer l’opération.
+Attendez que votre PC redémarre et vérifiez si cela résout le problème.
+Attendez que votre PC redémarre et vérifiez si cela résout le problème.
+Après avoir utilisé la réinitialisation réseau, vous devrez peut-être réinstaller et reconfigurer les autres logiciels réseau que vous utilisez, tels que le logiciel client VPN ou les commutateurs virtuels Hyper‑V (ou tout autre logiciel de virtualisation du réseau que vous utilisez).
+Après avoir utilisé la réinitialisation réseau, vous devrez peut-être réinstaller et reconfigurer les autres logiciels réseau que vous utilisez, tels que le logiciel client VPN ou les commutateurs virtuels Hyper‑V (ou tout autre logiciel de virtualisation du réseau que vous utilisez).
+La réinitialisation du réseau peut définir chacune de vos connexions réseau connues sur un profil de réseau public. Sur un profil de réseau public, votre PC n’est pas détectable par les autres PC et appareils du réseau, ce qui peut contribuer à renforcer sa sécurité. Pour utiliser un profil de réseau privé, consultez Tâches et paramètres réseau essentiels .
+La réinitialisation du réseau peut définir chacune de vos connexions réseau connues sur un profil de réseau public. Sur un profil de réseau public, votre PC n’est pas détectable par les autres PC et appareils du réseau, ce qui peut contribuer à renforcer sa sécurité. Pour utiliser un profil de réseau privé, consultez Tâches et paramètres réseau essentiels .
+Vous trouverez ci-dessous les problèmes Wi-Fi les plus courants rencontrés par les utilisateurs, ainsi que les étapes à suivre pour les résoudre.
+Connecté à Internet mais vitesse très lente
+Vérifier la force du signal : Assurez-vous que l’appareil est proche du routeur et exempt d’obstacles.
+Vérifier la force du signal : Assurez-vous que l’appareil est proche du routeur et exempt d’obstacles.
+Désactiver les applications en arrière-plan : Ouvrez le Gestionnaire des tâches ( Ctrl + Maj + Échap ). Processus finaux consommant une bande passante réseau élevée.
+Désactiver les applications en arrière-plan :
+Ouvrez le Gestionnaire des tâches ( Ctrl + Maj + Échap ).
+Ouvrez le Gestionnaire des tâches ( Ctrl + Maj + Échap ).
+Processus finaux consommant une bande passante réseau élevée.
+Processus finaux consommant une bande passante réseau élevée.
+Tester les performances du routeur : Connectez un autre appareil au Wi-Fi. Si le problème persiste, le routeur peut nécessiter une maintenance ou un remplacement.
+Tester les performances du routeur : Connectez un autre appareil au Wi-Fi. Si le problème persiste, le routeur peut nécessiter une maintenance ou un remplacement.
+Si l’option bascule Wi-Fi est manquante ou n’est pas visible dans les paramètres, suivez les étapes de résolution des problèmes ci-dessous.
+Vérifier le commutateur matériel : certains ordinateurs portables disposent d’un commutateur de Wi-Fi physique ; vérifiez qu’il est activé.
+Vérifier le commutateur matériel : certains ordinateurs portables disposent d’un commutateur de Wi-Fi physique ; vérifiez qu’il est activé.
+Activez l’adaptateur Wi-Fi : Ouvrez Gestionnaire de périphériques et développez Cartes réseau . Cliquez avec le bouton droit sur votre adaptateur Wi-Fi et sélectionnez Activer l’appareil .
+Ouvrez Gestionnaire de périphériques et développez Cartes réseau .
+Ouvrez Gestionnaire de périphériques et développez Cartes réseau .
+Cliquez avec le bouton droit sur votre adaptateur Wi-Fi et sélectionnez Activer l’appareil .
+Cliquez avec le bouton droit sur votre adaptateur Wi-Fi et sélectionnez Activer l’appareil .
+Redémarrez le service WLAN : Appuyez sur Win + R , tapez services.msc , puis appuyez sur Entrée. Recherchez WLAN AutoConfig , cliquez avec le bouton droit, puis sélectionnez Redémarrer .
+Appuyez sur Win + R , tapez services.msc , puis appuyez sur Entrée.
+Appuyez sur Win + R , tapez services.msc , puis appuyez sur Entrée.
+Recherchez WLAN AutoConfig , cliquez avec le bouton droit, puis sélectionnez Redémarrer .
+Recherchez WLAN AutoConfig , cliquez avec le bouton droit, puis sélectionnez Redémarrer .
+Si la connexion Wi-Fi tombe fréquemment, interrompant le travail ou la diffusion en continu, suivez les étapes ci-dessous.
+Vérifier les paramètres d’alimentation Accédez à Panneau de configuration > options d’alimentation du matériel et du son >. Sélectionnez votre plan, puis cliquez sur Modifier les paramètres du plan . Cliquez sur Modifier les paramètres d’alimentation avancés et développez Paramètres de l’adaptateur sans fil . Définissez Mode d’économie d’énergie sur Performances maximales .
+Accédez à Panneau de configuration > options d’alimentation du matériel et du son >.
+Accédez à Panneau de configuration > options d’alimentation du matériel et du son >.
+Sélectionnez votre plan, puis cliquez sur Modifier les paramètres du plan .
+Sélectionnez votre plan, puis cliquez sur Modifier les paramètres du plan .
+Cliquez sur Modifier les paramètres d’alimentation avancés et développez Paramètres de l’adaptateur sans fil .
+Cliquez sur Modifier les paramètres d’alimentation avancés et développez Paramètres de l’adaptateur sans fil .
+Définissez Mode d’économie d’énergie sur Performances maximales .
+Définissez Mode d’économie d’énergie sur Performances maximales .
+Ajuster le canal du routeur : Accédez à la page d’administration de votre routeur (reportez-vous à son manuel) et modifiez le canal sans fil pour réduire les interférences.
+Ajuster le canal du routeur : Accédez à la page d’administration de votre routeur (reportez-vous à son manuel) et modifiez le canal sans fil pour réduire les interférences.
+Vous êtes connecté au Wi-Fi, mais aucune connexion Internet n’est détectée (c’est ce que l’on qualifie de « connectivité limitée »)
+Votre PC Windows est connecté à votre réseau local, mais n’est pas connecté à Internet. Si vous sélectionnez l’icône Pas de connexion Internet, le message Pas d’Internet s’affiche sous le réseau Wi-Fi auquel vous êtes connecté. Vous pouvez probablement voir d’autres PC et appareils sur votre réseau local, mais vous ne pouvez pas faire des choses qui nécessitent un accès à Internet, comme naviguer sur le web, utiliser la messagerie électronique ou diffuser de la musique et de la vidéo.
+Pour déterminer si votre PC possède une connectivité limitée sans connexion Internet, Windows envoie une petite demande HTTP à un serveur sur Internet. Si le serveur ne retourne aucune information, cette icône apparaît.
+Si l’appareil se connecte au Wi-Fi, mais que l’accès à Internet n’est pas disponible, suivez les étapes de résolution des problèmes ci-dessous.
+Désactivez Wi-Fi , réactivez-la et reconnectez-vous à votre réseau sans fil.
+Désactivez Wi-Fi , réactivez-la et reconnectez-vous à votre réseau sans fil.
+Renouveler la configuration IP Ouvrez l’invite de commandes en tant qu’administrateur. Saisissez ipconfig /release et appuyez sur Entrée. Saisissez ipconfig /renew et appuyez sur Entrée.
+Ouvrez l’invite de commandes en tant qu’administrateur.
+Ouvrez l’invite de commandes en tant qu’administrateur.
+Saisissez ipconfig /release et appuyez sur Entrée.
+Saisissez ipconfig /release et appuyez sur Entrée.
+Saisissez ipconfig /renew et appuyez sur Entrée.
+Saisissez ipconfig /renew et appuyez sur Entrée.
+Vider le cache DNS Ouvrez l’invite de commandes en tant qu’administrateur. Tapez ipconfig /flushdns et appuyez sur Entrée.
+Ouvrez l’invite de commandes en tant qu’administrateur.
+Ouvrez l’invite de commandes en tant qu’administrateur.
+Tapez ipconfig /flushdns et appuyez sur Entrée.
+Tapez ipconfig /flushdns et appuyez sur Entrée.
+Rechercher les paramètres du proxy Accédez à Paramètres > Réseau & Proxy > Internet . Désactivez tous les paramètres de proxy manuels.
+Accédez à Paramètres > Réseau & Proxy > Internet .
+Accédez à Paramètres > Réseau & Proxy > Internet .
+Désactivez tous les paramètres de proxy manuels.
+Désactivez tous les paramètres de proxy manuels.
+Vérifier votre adresse IP Recherchez votre adresse IP et assurez-vous qu’il ne s’agit pas de quelque chose comme ceci : 169.254.x.x. Si votre adresse IP ressemble à ceci, cela signifie que Windows n’a pas pu obtenir d’adresse IP à partir de votre routeur. Si vous n’utilisez pas d’adresses IP statiques sur votre réseau, vérifiez que le protocole DHCP est bien activé sur votre routeur. Consultez la documentation de votre routeur pour savoir comment vous y prendre. Si cela résout votre problème de Wi-Fi, l’icône Aucune connexion devient Wi-Fi connecté en quelques secondes.
+Recherchez votre adresse IP et assurez-vous qu’il ne s’agit pas de quelque chose comme ceci : 169.254.x.x. Si votre adresse IP ressemble à ceci, cela signifie que Windows n’a pas pu obtenir d’adresse IP à partir de votre routeur. Si vous n’utilisez pas d’adresses IP statiques sur votre réseau, vérifiez que le protocole DHCP est bien activé sur votre routeur. Consultez la documentation de votre routeur pour savoir comment vous y prendre. Si cela résout votre problème de Wi-Fi, l’icône Aucune connexion devient Wi-Fi connecté en quelques secondes.
+Recherchez votre adresse IP et assurez-vous qu’il ne s’agit pas de quelque chose comme ceci : 169.254.x.x. Si votre adresse IP ressemble à ceci, cela signifie que Windows n’a pas pu obtenir d’adresse IP à partir de votre routeur. Si vous n’utilisez pas d’adresses IP statiques sur votre réseau, vérifiez que le protocole DHCP est bien activé sur votre routeur. Consultez la documentation de votre routeur pour savoir comment vous y prendre. Si cela résout votre problème de Wi-Fi, l’icône Aucune connexion devient Wi-Fi connecté en quelques secondes.
+Vérifiez votre serveur DNS. Vérifiez que vous disposez d’un serveur DNS répertorié et que vous pouvez effectuer un test ping. Pour effectuer un test ping sur le serveur DNS : Ouvrez l’invite de commandes en tant qu’administrateur. Tapez ipconfig /all | findstr /c :""DNS Servers » et appuyez sur Entrée. Notez l’adresse IP du serveur DNS. À l’invite de commandes, tapez : ping [adresse du serveur DNS] . Si vous possédez une adresse IP valide mais que vous ne pouvez pas effectuer de test ping sur votre serveur DNS, vous pouvez modifier l’adresse de votre serveur DNS puis essayer d’effectuer un test ping sur la nouvelle adresse. Il existe de nombreux serveurs DNS publics gratuits. Pour les trouver, recherchez « serveurs DNS publics » sur le web. Pour en savoir plus sur la modification de votre serveur DNS dans Windows, reportez-vous à l’article Modifier les paramètres TCP/IP .
+Vérifiez votre serveur DNS. Vérifiez que vous disposez d’un serveur DNS répertorié et que vous pouvez effectuer un test ping. Pour effectuer un test ping sur le serveur DNS :
+Ouvrez l’invite de commandes en tant qu’administrateur. Tapez ipconfig /all | findstr /c :""DNS Servers » et appuyez sur Entrée. Notez l’adresse IP du serveur DNS.
+Ouvrez l’invite de commandes en tant qu’administrateur. Tapez ipconfig /all | findstr /c :""DNS Servers » et appuyez sur Entrée. Notez l’adresse IP du serveur DNS.
+À l’invite de commandes, tapez : ping [adresse du serveur DNS] .
+À l’invite de commandes, tapez : ping [adresse du serveur DNS] .
+Si vous possédez une adresse IP valide mais que vous ne pouvez pas effectuer de test ping sur votre serveur DNS, vous pouvez modifier l’adresse de votre serveur DNS puis essayer d’effectuer un test ping sur la nouvelle adresse. Il existe de nombreux serveurs DNS publics gratuits. Pour les trouver, recherchez « serveurs DNS publics » sur le web. Pour en savoir plus sur la modification de votre serveur DNS dans Windows, reportez-vous à l’article Modifier les paramètres TCP/IP .
+Si vous possédez une adresse IP valide mais que vous ne pouvez pas effectuer de test ping sur votre serveur DNS, vous pouvez modifier l’adresse de votre serveur DNS puis essayer d’effectuer un test ping sur la nouvelle adresse. Il existe de nombreux serveurs DNS publics gratuits. Pour les trouver, recherchez « serveurs DNS publics » sur le web. Pour en savoir plus sur la modification de votre serveur DNS dans Windows, reportez-vous à l’article Modifier les paramètres TCP/IP .
+Si vous ne parvenez pas à vous connecter à Wi-Fi en raison d’erreurs de mot de passe incorrectes malgré l’entrée des informations d’identification correctes, suivez les étapes de résolution des problèmes ci-dessous.
+Vérifier le mot de passe : Vérifiez que le mot de passe est correct et qu’il correspond à la configuration du routeur.
+Vérifier le mot de passe : Vérifiez que le mot de passe est correct et qu’il correspond à la configuration du routeur.
+Réinitialiser le routeur : redémarrez le routeur ou restaurez ses paramètres d’usine.
+Réinitialiser le routeur : redémarrez le routeur ou restaurez ses paramètres d’usine.
+Mettre à jour le microprogramme du routeur : Reportez-vous au manuel du routeur pour connaître les étapes de mise à jour de son microprogramme.
+Mettre à jour le microprogramme du routeur : Reportez-vous au manuel du routeur pour connaître les étapes de mise à jour de son microprogramme.
+Votre carte réseau sans fil est reconnue, mais aucun réseau Wi-Fi n’est trouvé et vous n’êtes pas connecté à Wi-Fi
+Si vous voyez l’icône Pas de connexion Internet alors que vous êtes à portée de réseaux Wi-Fi, cela peut signifier que :
+Le commutateur Wi-Fi physique sur votre ordinateur portable ou votre tablette est désactivé. Assurez-vous qu’il est activé.
+Le commutateur Wi-Fi physique sur votre ordinateur portable ou votre tablette est désactivé. Assurez-vous qu’il est activé.
+Le Wi-Fi est désactivé dans les paramètres Wi-Fi . Ouvrez Paramètres , puis sélectionnez Réseau & Internet . Assurez-vous que le Wi-Fi est activé.
+Le Wi-Fi est désactivé dans les paramètres Wi-Fi . Ouvrez Paramètres , puis sélectionnez Réseau & Internet . Assurez-vous que le Wi-Fi est activé.
+Votre carte ne prend pas en charge la fréquence sur laquelle votre réseau diffuse . Par exemple, il se peut que votre carte prenne uniquement en charge la bande de fréquence 2,4 GHz, alors que votre réseau utilise la bande 5 GHz. Consultez la documentation de votre routeur pour savoir quelle fréquence il utilise. Pour en savoir plus sur les différences entre les réseaux 2,4 GHz et les réseaux 5 GHz, case activée la section Wi-Fi et la disposition de votre domicile .
+Votre carte ne prend pas en charge la fréquence sur laquelle votre réseau diffuse . Par exemple, il se peut que votre carte prenne uniquement en charge la bande de fréquence 2,4 GHz, alors que votre réseau utilise la bande 5 GHz. Consultez la documentation de votre routeur pour savoir quelle fréquence il utilise. Pour en savoir plus sur les différences entre les réseaux 2,4 GHz et les réseaux 5 GHz, case activée la section Wi-Fi et la disposition de votre domicile .
+Votre carte prend en charge la fréquence de votre réseau, mais le pilote de la carte réseau sans fil la filtre. Même si ce problème n’est pas courant, il s’est déjà produit. Pour vérifier que votre carte réseau sans fil autorise la même fréquence que votre réseau sans fil, procédez comme suit : Sélectionnez Rechercher dans la barre des tâches, entrez Gestionnaire de périphériques , puis sélectionnez Gestionnaire de périphériques dans la liste des résultats. Dans le Gestionnaire de périphériques, sélectionnez Cartes réseau > nom de la carte réseau sans fil. Appuyez de façon longue (ou cliquez avec le bouton droit) sur votre carte réseau sans fil, puis sélectionnez Propriétés . Sélectionnez l’onglet Avancé , puis recherchez un paramètre Mode sans fil ou Bande et assurez-vous qu’il autorise la fréquence de votre réseau.
+Votre carte prend en charge la fréquence de votre réseau, mais le pilote de la carte réseau sans fil la filtre. Même si ce problème n’est pas courant, il s’est déjà produit. Pour vérifier que votre carte réseau sans fil autorise la même fréquence que votre réseau sans fil, procédez comme suit :
+Sélectionnez Rechercher dans la barre des tâches, entrez Gestionnaire de périphériques , puis sélectionnez Gestionnaire de périphériques dans la liste des résultats.
+Sélectionnez Rechercher dans la barre des tâches, entrez Gestionnaire de périphériques , puis sélectionnez Gestionnaire de périphériques dans la liste des résultats.
+Dans le Gestionnaire de périphériques, sélectionnez Cartes réseau > nom de la carte réseau sans fil.
+Dans le Gestionnaire de périphériques, sélectionnez Cartes réseau > nom de la carte réseau sans fil.
+Appuyez de façon longue (ou cliquez avec le bouton droit) sur votre carte réseau sans fil, puis sélectionnez Propriétés .
+Appuyez de façon longue (ou cliquez avec le bouton droit) sur votre carte réseau sans fil, puis sélectionnez Propriétés .
+Sélectionnez l’onglet Avancé , puis recherchez un paramètre Mode sans fil ou Bande et assurez-vous qu’il autorise la fréquence de votre réseau.
+Sélectionnez l’onglet Avancé , puis recherchez un paramètre Mode sans fil ou Bande et assurez-vous qu’il autorise la fréquence de votre réseau.
+Aucune carte réseau n’est détectée ou activée
+Si tel est le cas, voici quelques opérations que vous pouvez tenter :
+Dans le rapport de réseau sans fil, recherchez votre carte réseau sans fil dans la section Cartes réseau , puis vérifiez si un Numéro de problème y est répertorié. S’il est répertorié, le numéro correspond au code d’erreur Gestionnaire de périphériques qui vous indique pourquoi le pilote n’a pas été chargé.
+Dans le rapport de réseau sans fil, recherchez votre carte réseau sans fil dans la section Cartes réseau , puis vérifiez si un Numéro de problème y est répertorié. S’il est répertorié, le numéro correspond au code d’erreur Gestionnaire de périphériques qui vous indique pourquoi le pilote n’a pas été chargé.
+Vérifiez que vous disposez du pilote le plus récent en exécutant Windows Update et case activée la version du pilote et la date du pilote pour voir s’ils correspondent aux dernières versions de pilote répertoriées sur le site web du fabricant de votre appareil. Pour trouver la version et la date du pilote dans le Gestionnaire de périphériques , développez Cartes réseau , appuyez de façon prolongée (ou cliquez avec le bouton droit) sur votre carte réseau sans fil, sélectionnez Propriétés , puis l’onglet Pilote .
+Vérifiez que vous disposez du pilote le plus récent en exécutant Windows Update et case activée la version du pilote et la date du pilote pour voir s’ils correspondent aux dernières versions de pilote répertoriées sur le site web du fabricant de votre appareil. Pour trouver la version et la date du pilote dans le Gestionnaire de périphériques , développez Cartes réseau , appuyez de façon prolongée (ou cliquez avec le bouton droit) sur votre carte réseau sans fil, sélectionnez Propriétés , puis l’onglet Pilote .
+Assurez-vous que la carte réseau sans fil n’est pas désactivée dans le Gestionnaire de périphériques. Pour ce faire, dans le Gestionnaire de périphériques, développez Cartes réseau , appuyez de façon prolongée (ou cliquez avec le bouton droit) sur votre sans fil carte réseau, puis sélectionnez Activer l’appareil .
+Assurez-vous que la carte réseau sans fil n’est pas désactivée dans le Gestionnaire de périphériques. Pour ce faire, dans le Gestionnaire de périphériques, développez Cartes réseau , appuyez de façon prolongée (ou cliquez avec le bouton droit) sur votre sans fil carte réseau, puis sélectionnez Activer l’appareil .
+Si votre carte réseau sans fil n’est pas répertoriée dans le Gestionnaire de périphériques, Windows ne la détecte pas. Dans ce cas, vous devrez peut-être installer le pilote manuellement. Consultez le site web du fabricant de votre appareil pour trouver un pilote qui fonctionne dans Windows.
+Si votre carte réseau sans fil n’est pas répertoriée dans le Gestionnaire de périphériques, Windows ne la détecte pas. Dans ce cas, vous devrez peut-être installer le pilote manuellement. Consultez le site web du fabricant de votre appareil pour trouver un pilote qui fonctionne dans Windows.
+Explorez les avantages de l’abonnement, parcourez les cours de formation, découvrez comment sécuriser votre appareil, etc.
+Les communautés vous permettent de poser des questions et d'y répondre, de donner vos commentaires et de bénéficier de l'avis d'experts aux connaissances approfondies.
+Trouvez des solutions aux problèmes courants ou obtenez de l’aide auprès d’un agent de support.
+Ces informations vous ont-elles été utiles ?
+Nous vous remercions de vos commentaires.
+Copilot pour une utilisation personnelle
+Formation et développement des enseignants
+Prise en charge des applications du marketplace d’IA
+Mentions légales et Informations consommateurs"

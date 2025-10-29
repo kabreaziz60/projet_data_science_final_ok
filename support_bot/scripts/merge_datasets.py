@@ -1,73 +1,64 @@
-import requests
+import os, time, requests, pandas as pd
 from bs4 import BeautifulSoup
-import pandas as pd
 
-# 🔹 Scraper Microsoft Support
-def scrape_microsoft_wifi():
-    url = "https://support.microsoft.com/fr-fr/windows/r%C3%A9soudre-les-probl%C3%A8mes-de-connexion-wi-fi-dans-windows-9424a1f7-6a3b-65a6-4d78-7f07eee84d2c"
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(BASE_DIR, "data")
+os.makedirs(DATA_DIR, exist_ok=True)
 
-    data = []
-    for section in soup.select('h2, h3'):
-        titre = section.text.strip()
-        contenu = section.find_next_sibling('p')
-        if contenu:
-            data.append({
-                'source': 'Microsoft',
-                'titre': titre,
-                'contenu': contenu.text.strip()
-            })
-    return data
+HEADERS = {"User-Agent": "Mozilla/5.0"}
 
-# 🔹 Scraper Softonic
-def scrape_softonic_wifi():
-    url = "https://fr.softonic.com/telechargements/pilote-wifi"
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
+MS_URLS = [
+  "https://support.microsoft.com/fr-fr/windows/r%C3%A9soudre-les-probl%C3%A8mes-de-connexion-wi-fi-dans-windows-9424a1f7-6a3b-65a6-4d78-7f07eee84d2c",
+  "https://support.microsoft.com/fr-fr/windows/windows-update-faq-16c42daf-2354-8e08-5df9-9d6a3a5b1a45",
+  "https://support.microsoft.com/fr-fr/windows/r%C3%A9parer-les-probl%C3%A8mes-d-imprimante-dans-windows-10-ecfe4daf-0b2c-0b7a-4350-76d6f2f7a6f5",
+]
 
-    data = []
-    for item in soup.select('.sc-1v6ydtz-0'):
-        titre = item.select_one('h3')
-        description = item.select_one('p')
-        if titre and description:
-            data.append({
-                'source': 'Softonic',
-                'titre': titre.text.strip(),
-                'contenu': description.text.strip()
-            })
-    return data
+VENDOR_URLS = [
+  ("lenovo","https://support.lenovo.com/fr/fr/solutions/ht502846-windows-10-wifi-troubleshooting"),
+  ("hp","https://support.hp.com/fr-fr/help/diagnostics/wireless-network-and-internet"),
+  ("dell","https://www.dell.com/support/kbdoc/fr-fr/000124630/windows-10-r%C3%A9solution-des-probl%C3%A8mes-de-r%C3%A9seau-sans-fil"),
+  ("mozilla","https://support.mozilla.org/fr/kb/resoudre-les-problemes-de-connexion"),
+]
 
-# 🔹 Scraper 01net
-def scrape_01net_wifi():
-    url = "https://www.01net.com/telecharger/utilitaire/reseau/wifi-manager.html"
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
+def scrape_generic(url):
+  try:
+    r = requests.get(url, headers=HEADERS, timeout=25)
+    r.raise_for_status()
+    soup = BeautifulSoup(r.text, "html.parser")
+    title = soup.find(["h1","h2"])
+    blocks = soup.select("h2, h3, p, li")
+    buf=[]
+    for b in blocks:
+      t = " ".join(b.get_text(" ", strip=True).split())
+      if len(t) >= 40:
+        buf.append(t)
+    if title and buf:
+      return {"source": url, "titre": title.get_text(strip=True), "contenu": "\n".join(buf)}
+  except Exception:
+    return None
+  return None
 
-    data = []
-    titre = soup.select_one('h1')
-    description = soup.select_one('.description')
-    if titre and description:
-        data.append({
-            'source': '01net',
-            'titre': titre.text.strip(),
-            'contenu': description.text.strip()
-        })
-    return data
+def run():
+  rows=[]
+  for url in MS_URLS:
+    item = scrape_generic(url)
+    if item: rows.append(item)
+    time.sleep(1.0)
 
-# 🔹 Fusion des données
-def merge_all_sources():
-    all_data = scrape_microsoft_wifi() + scrape_softonic_wifi() + scrape_01net_wifi()
-    df = pd.DataFrame(all_data)
+  for vendor, url in VENDOR_URLS:
+    item = scrape_generic(url)
+    if item:
+      item["titre"] = f"[{vendor.upper()}] {item['titre']}"
+      rows.append(item)
+    time.sleep(1.0)
 
-    # Export CSV
-    df.to_csv('../data/support_wifi_dataset.csv', index=False)
+  df = pd.DataFrame(rows).drop_duplicates(subset=["source","titre","contenu"])
+  df = df[df["contenu"].str.len() > 60]
+  out_csv = os.path.join(DATA_DIR, "support_dataset_raw.csv")
+  out_json = os.path.join(DATA_DIR, "support_dataset_raw.json")
+  df.to_csv(out_csv, index=False)
+  df.to_json(out_json, orient="records", force_ascii=False, indent=2)
+  print(f"✅ Fusion: {len(df)} lignes → {out_csv}")
 
-    # Export JSON
-    df.to_json('../data/support_wifi_dataset.json', orient='records', force_ascii=False, indent=2)
-
-    print("✅ Données fusionnées et exportées avec succès.")
-
-# 🔹 Exécution
 if __name__ == "__main__":
-    merge_all_sources()
+  run()

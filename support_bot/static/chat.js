@@ -1,138 +1,158 @@
-// chat.js
-// Widget logic: open/close, send message to /api/ask/, render conversation.
-// Designed to be simple, robust and easy to customize.
-
+// Chatbot front — robuste, avec historique + topics + CSRF + fallback
 (function () {
-  const toggle = document.getElementById('chatToggle');
-  const widget = document.getElementById('chat-widget');
-  const body = document.getElementById('chatBody');
-  const convo = document.getElementById('conversation');
-  const form = document.getElementById('chatForm');
-  const input = document.getElementById('messageInput');
-  const quick = document.getElementById('quickActions');
+  const $ = (id) => document.getElementById(id);
 
-  // initial messages
-  const welcomeBot = `Bonjour ! Je suis le support TIC. Choisissez une action rapide ou tapez votre question.`;
-  function botWelcome() {
-    addBotMsg(welcomeBot);
-  }
+  const widget = $('chat-widget');
+  const toggle = $('chatToggle');
+  const body = $('chatBody');
+  const convo = $('conversation');
+  const form = $('chatForm');
+  const input = $('messageInput');
+  const quick = $('quickActions');
 
-  // Helpers to create message nodes
-  function addBotMsg(text) {
-    const el = document.createElement('div');
-    el.className = 'msg bot';
-    el.innerText = text;
-    convo.appendChild(el);
-    convo.scrollTop = convo.scrollHeight;
+  const endpoint = widget?.dataset?.endpoint || '/api/ask/';
+
+  /* CSRF (Django) */
+  function getCookie(name){
+    let v=null; if(document.cookie && document.cookie!==''){
+      for(const raw of document.cookie.split(';')){
+        const c=raw.trim();
+        if(c.substring(0,name.length+1)===name+'='){v=decodeURIComponent(c.substring(name.length+1));break;}
+      }
+    } return v;
   }
-  function addUserMsg(text) {
-    const el = document.createElement('div');
-    el.className = 'msg user';
-    el.innerText = text;
+  const CSRFTOKEN = getCookie('csrftoken');
+
+  /* Historique local */
+  const history = []; // {role:'user'|'assistant', content:'...'}
+
+  /* Helpers UI */
+  function sanitize(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+  function addMsg(text, cls){
+    if(!convo) return;
+    const el=document.createElement('div');
+    el.className='msg '+cls;
+    el.innerHTML=sanitize(text);
     convo.appendChild(el);
-    convo.scrollTop = convo.scrollHeight;
+    convo.scrollTop=convo.scrollHeight;
+    history.push({role: cls==='user' ? 'user' : 'assistant', content: text});
+    if(history.length>20) history.shift();
   }
-  function addTyping() {
-    const el = document.createElement('div');
-    el.className = 'msg bot typing';
-    el.innerText = '…';
+  function showTyping(){
+    const el=document.createElement('div');
+    el.className='typing';
+    el.innerHTML='<span></span><i></i>';
     convo.appendChild(el);
-    convo.scrollTop = convo.scrollHeight;
+    convo.scrollTop=convo.scrollHeight;
     return el;
   }
+  function getAnswer(data){
+    return data?.answer ?? data?.response ?? data?.message ?? data?.reply ?? data?.text ?? null;
+  }
 
-  // Toggle widget open/close
-  toggle.addEventListener('click', () => {
-    const open = widget.classList.toggle('chat-open');
-    widget.classList.toggle('chat-closed', !open);
-    const expanded = open;
-    toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-    if (expanded) {
-      body.hidden = false;
-      // if first open and no messages, show welcome
-      if (convo.children.length === 0) botWelcome();
-      input.focus();
-    } else {
-      body.hidden = true;
-    }
-  });
+  /* Envoi principal */
+  async function sendQuestion(question, topic=null){
+    if(!question) return;
+    addMsg(question,'user');
+    const typing=showTyping();
 
-  // Quick action buttons
-  quick.addEventListener('click', (ev) => {
-    if (ev.target && ev.target.classList.contains('qa-btn')) {
-      const q = ev.target.innerText.trim();
-      sendQuestion(q);
-    }
-  });
+    const payload = {
+      question,
+      topic,
+      history: history.slice(-10)
+    };
 
-  // Submit handler
-  form.addEventListener('submit', (ev) => {
-    ev.preventDefault();
-    const q = input.value.trim();
-    if (!q) return;
-    sendQuestion(q);
-    input.value = '';
-  });
-
-  // Main function to call backend
-  async function sendQuestion(question) {
-    addUserMsg(question);
-    const typingEl = addTyping();
-
-    try {
-      const res = await fetch('/api/ask/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          // if CSRF used on server, include token (we read it in template)
-          'X-CSRFToken': typeof CSRFTOKEN !== 'undefined' ? CSRFTOKEN : ''
-        },
-        body: JSON.stringify({ question })
+    const baseHeaders = CSRFTOKEN ? {'X-CSRFToken': CSRFTOKEN} : {};
+    try{
+      // 1) JSON
+      let res = await fetch(endpoint, {
+        method:'POST',
+        headers:{'Content-Type':'application/json', ...baseHeaders},
+        body: JSON.stringify(payload)
       });
 
-      if (!res.ok) {
-        const txt = await res.text();
-        typingEl.innerText = 'Erreur : ' + (res.status + ' ' + txt);
-        return;
+      // 2) fallback urlencoded si backend n’accepte pas JSON
+      if(!res.ok && (res.status===415 || res.status===400)){
+        res = await fetch(endpoint, {
+          method:'POST',
+          headers:{'Content-Type':'application/x-www-form-urlencoded', ...baseHeaders},
+          body: 'message='+encodeURIComponent(question)
+        });
       }
 
-      const data = await res.json();
-      // remove typing
-      typingEl.remove();
+      const data = await res.json().catch(()=> ({}));
+      typing.remove();
 
-      if (data.answer) {
-        addBotMsg(data.answer);
-      } else if (data.error) {
-        addBotMsg('Erreur : ' + data.error);
-      } else {
-        addBotMsg('Aucune réponse reçue.');
+      const ans = getAnswer(data);
+      if(ans){
+        addMsg(ans,'bot');
+      }else if(data?.error){
+        addMsg('⚠️ '+data.error,'bot');
+      }else{
+        addMsg("Désolé, je n'ai pas compris 🤖",'bot');
       }
 
-      // Optionally render top context (first 2 items) as small captions
-      if (Array.isArray(data.context) && data.context.length > 0) {
-        const ctx = data.context.slice(0, 2).map(c => `• ${c.question} → ${c.answer}`).join('\n');
-        const ctr = document.createElement('div');
-        ctr.style.fontSize = '12px';
-        ctr.style.color = '#6c757d';
-        ctr.style.whiteSpace = 'pre-wrap';
-        ctr.innerText = 'Sources:\n' + ctx;
-        convo.appendChild(ctr);
-        convo.scrollTop = convo.scrollHeight;
+      // mini-sources
+      if(Array.isArray(data?.context) && data.context.length){
+        const tip=document.createElement('div');
+        tip.className='msg bot';
+        tip.style.fontSize='12px'; tip.style.color='#64748b';
+        tip.innerHTML=sanitize('Sources :\n'+data.context.slice(0,2).map(c=>`• ${c.question} → ${c.answer}`).join('\n')).replace(/\n/g,'<br>');
+        convo.appendChild(tip); convo.scrollTop=convo.scrollHeight;
       }
-
-    } catch (err) {
-      typingEl.innerText = 'Erreur réseau : ' + (err.message || err);
+    }catch(err){
+      typing.remove();
+      addMsg('Erreur réseau : '+(err?.message||err),'bot');
     }
   }
 
-  // Expose simple API if needed
-  window.chatWidget = {
-    open: () => { if (!widget.classList.contains('chat-open')) toggle.click(); },
-    close: () => { if (widget.classList.contains('chat-open')) toggle.click(); },
-    send: (q) => sendQuestion(q)
-  };
+  /* Toggle open/close */
+  if(toggle){
+    toggle.addEventListener('click',()=>{
+      const open=widget.classList.toggle('chat-open');
+      widget.classList.toggle('chat-closed', !open);
+      toggle.setAttribute('aria-expanded', open?'true':'false');
+      body.hidden=!open;
+      if(open && convo.children.length===0){
+        addMsg("👋 Bonjour ! Je suis le support TIC. Choisissez une action rapide ou posez votre question.","bot");
+      }
+    });
+  }
 
-  // Auto open small on first load (optional)
-  // toggle.click();
+  /* Quick actions → topic */
+  if(quick){
+    quick.addEventListener('click',(e)=>{
+      const el=e.target;
+      if(el && el.classList.contains('qa-btn')){
+        const txt=el.innerText.trim();
+        const topic = /d[ée]pannage/i.test(txt) ? 'depannage_pc'
+                    : /logiciel/i.test(txt)     ? 'installation_logiciel'
+                    : /wi-?fi/i.test(txt)       ? 'wifi'
+                    : null;
+        sendQuestion(txt, topic);
+      }
+    });
+  }
 
+  /* Form submit */
+  if(form){
+    form.addEventListener('submit',(e)=>{
+      e.preventDefault();
+      const q=input.value.trim();
+      if(!q) return;
+      sendQuestion(q,null);
+      input.value='';
+    });
+  }
+
+  /* Init */
+  document.addEventListener('DOMContentLoaded',()=>{
+    const y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
+    // Ouvrir et message d’accueil une seule fois
+    if(convo && convo.children.length===0){
+      body.hidden=false;
+      widget.classList.add('chat-open');
+      addMsg("👋 Bonjour ! Je suis le support TIC. Choisissez une action rapide ou posez votre question.","bot");
+    }
+  });
 })();

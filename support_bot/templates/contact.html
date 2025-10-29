@@ -1,0 +1,181 @@
+{% load static %}
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Nous contacter — Support TIC</title>
+  <link rel="stylesheet" href="{% static 'chat.css' %}">
+  <style>
+    /* ====== Patch anti-flou (sécurité) ====== */
+    .no-blur, .no-blur * { filter:none!important; -webkit-filter:none!important; backdrop-filter:none!important; }
+
+    /* ====== HERO CLAIR ====== */
+    .hero{
+      padding:64px 20px;
+      text-align:center;
+      background:#e9f1ff;
+      color:#0f1a2d;
+      border-bottom:1px solid rgba(0,0,0,.08);
+    }
+    .hero h1{margin:0 0 8px;font-size:42px;font-weight:900}
+    .hero p{margin:0;font-size:18px;color:#243459}
+
+    /* ====== LAYOUT ====== */
+    .container{max-width:1100px;margin:0 auto;padding:32px 20px}
+    .grid{display:grid;gap:22px;grid-template-columns:1fr 1fr}
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
+
+    /* ====== CARDS ====== */
+    .card{
+      background:#ffffff;
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:16px;
+      padding:22px;
+      color:#0f1a2d;
+      box-shadow:0 12px 28px rgba(0,0,0,.08);
+    }
+    .card h2{margin:4px 0 16px;font-size:24px;font-weight:900}
+
+    /* ====== FORMULAIRE ====== */
+    .field{display:flex;flex-direction:column;margin:12px 0}
+    .field label{font-weight:700;color:#1b2a4a;margin-bottom:6px}
+    .input,.textarea{
+      background:#f6f9ff;
+      border:1px solid rgba(0,0,0,.12);
+      color:#0f1a2d;
+      border-radius:12px;
+      padding:12px 14px;
+      font-size:16px;
+      outline:0;
+      transition:border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .textarea{resize:vertical}
+    .input:focus,.textarea:focus{
+      border-color:#3a6cf0;
+      background:#fff;
+      box-shadow:0 0 0 4px rgba(58,108,240,.15);
+    }
+
+    .actions{display:flex;align-items:center;gap:12px;margin-top:8px}
+    .hint{font-size:14px;color:#5b6a8a}
+
+    .btn{
+      background:#3a6cf0;
+      border:none;
+      color:#fff;
+      padding:12px 18px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:800;
+      font-size:16px;
+      box-shadow:0 8px 18px rgba(58,108,240,.35);
+      transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    .btn:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(58,108,240,.45)}
+    .btn:active{transform:translateY(0);box-shadow:0 4px 12px rgba(58,108,240,.35)}
+
+    /* ====== INFO ====== */
+    .info p{margin:.5em 0}
+    .info a{color:#2f5ae0;text-decoration:none}
+    .info a:hover{text-decoration:underline}
+    .divider{height:1px;background:rgba(0,0,0,.08);margin:12px 0;border:0}
+
+    .social-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+    .btn-outline{
+      background:#f4f7ff;
+      color:#26407c;
+      border:1px solid rgba(0,0,0,.1);
+      border-radius:12px;
+      padding:10px 14px;
+      font-weight:800;
+      font-size:15px;
+      text-decoration:none;
+      transition:all .15s ease;
+      display:inline-flex;align-items:center;justify-content:center;
+    }
+    .btn-outline:hover{background:#e7eeff;color:#1b2a4a;transform:translateY(-1px)}
+  </style>
+</head>
+<body class="chatbot-body theme-clean no-blur">
+
+  <!-- NAVBAR -->
+  <header class="site-navbar">
+    <div class="nav-inner">
+      <a class="nav-brand" href="{% url 'chatbot_page' %}">
+        <img src="{% static '../static/team/logo.png' %}" alt="Logo">
+        <span>SUPPORT TIC</span>
+      </a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a class="nav-link" href="{% url 'chatbot_page' %}">Accueil</a>
+        <a class="nav-link" href="{% url 'about_page' %}">À propos</a>
+        <a class="nav-link active" href="{% url 'contact_page' %}">Nous contacter</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Nous contacter</h1>
+    <p>Une question sur l’inscription, le Wi-Fi ou les outils ? Écrivez-nous.</p>
+  </section>
+
+  <!-- CONTENU -->
+  <main class="page-wrap">
+    <div class="container grid">
+
+      <!-- FORMULAIRE -->
+      <section class="card">
+        <h2>Formulaire</h2>
+        <form method="post" action="#">
+          {% csrf_token %}
+          <div class="field">
+            <label for="fullName">Nom & prénom</label>
+            <input id="fullName" class="input" type="text" name="fullName" placeholder="Ex. Kabré Abdoul Aziz" required>
+          </div>
+          <div class="field">
+            <label for="email">Adresse e-mail</label>
+            <input id="email" class="input" type="email" name="email" placeholder="exemple@domaine.com" required>
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" class="textarea" name="message" rows="6" placeholder="Décrivez votre besoin…"></textarea>
+          </div>
+          <div class="actions">
+            <button class="btn" type="submit">Envoyer</button>
+            <span class="hint">Temps de réponse moyen : <strong>24 h</strong></span>
+          </div>
+        </form>
+      </section>
+
+      <!-- COORDONNÉES -->
+      <aside class="card info">
+        <h2>Coordonnées</h2>
+        <p><strong>📧 Email :</strong> <a href="mailto:support@example.com">support@example.com</a></p>
+        <p><strong>📞 Téléphone :</strong> +226 00 00 00 00</p>
+        <p><strong>🏫 Université :</strong> Joseph Ki-Zerbo</p>
+        <p><strong>🕘 Heures :</strong> Lun–Ven, 08h–18h</p>
+
+        <hr class="divider">
+
+        <p><strong>Réseaux :</strong></p>
+        <div class="social-row">
+          <a href="#" class="btn-outline" aria-label="GitHub">GitHub</a>
+          <a href="#" class="btn-outline" aria-label="LinkedIn">LinkedIn</a>
+          <a href="#" class="btn-outline" aria-label="Facebook">Facebook</a>
+          <a href="#" class="btn-outline" aria-label="TikTok">TikTok</a>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <small>&copy; <span id="year"></span> SUPPORT TIC — Projet étudiant UJKZ.</small>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

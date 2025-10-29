@@ -1,0 +1,195 @@
+{% load static %}
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>À propos — Support TIC</title>
+  <link rel="stylesheet" href="{% static 'chat.css' %}">
+  <style>
+    /* ======= SUPPRIMER TOUT BLUR/VOILE SUR CETTE PAGE ======= */
+    .about-page.chatbot-body::before { display:none !important; }
+    .about-page, .about-page * {
+      filter:none !important; -webkit-filter:none !important; backdrop-filter:none !important;
+    }
+
+    /* ======= FOND & TYPO ======= */
+    body.about-page{
+      background:#202938;       /* bleu ardoise élégant */
+      color:#ffffff;
+      font-family:"Segoe UI", Arial, sans-serif;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    /* ======= NAVBAR (on la garde claire et nette) ======= */
+    .site-navbar{ background:#1b2330; border-bottom:1px solid rgba(255,255,255,.12); }
+    .site-navbar .nav-link{ color:#cdd6ea; }
+    .site-navbar .nav-link.active, .site-navbar .nav-link:hover{ color:#7fb0ff; background:rgba(255,255,255,.06) }
+
+    /* ======= HERO SANS FLOU ======= */
+    .hero{
+      padding:64px 20px;
+      text-align:center;
+      background:#202938; /* même couleur que la page */
+      color:#fff;
+      border-bottom:1px solid rgba(255,255,255,.12);
+    }
+    .hero h1{ margin:0 0 10px; font-size:44px; font-weight:900; color:#fff; }
+    .hero p { color:#e9eefc; }
+
+    /* ======= WRAP ======= */
+    .container{ max-width:1180px; margin:0 auto; padding:32px 24px; }
+    h2{ font-weight:900; margin:28px 0 14px; font-size:30px; color:#fff; }
+    p { color:#f6f8ff; }
+
+    /* ======= TEAM GRID ======= */
+    .team-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap:22px;
+    }
+
+    /* ======= PROFIL CARD – STYLE SOMBRE (cohérent avec la page) ======= */
+    .team-card{
+      background:#263247;                       /* sombre chic */
+      color:#ffffff;
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:16px;
+      box-shadow:0 12px 28px rgba(0,0,0,.35);
+      padding:22px;
+      min-height:360px;                         /* compact & aligné */
+      display:flex; flex-direction:column; align-items:center; text-align:center;
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .team-card:hover{ transform:translateY(-3px); box-shadow:0 16px 36px rgba(0,0,0,.45) }
+
+    /* Avatar rond avec anneau blanc (tu y tenais) */
+    .team-photo{
+      width:152px; height:152px; border-radius:50%;
+      object-fit:cover; object-position:center;
+      background:#0e152b;
+      border:6px solid #fff;                    /* anneau blanc */
+      box-shadow:0 0 0 2px rgba(255,255,255,.25), 0 10px 26px rgba(0,0,0,.35);
+    }
+
+    .team-name{ margin-top:12px; font-weight:900; font-size:19px; color:#ffffff }
+    .team-role{ margin-top:4px; font-weight:700; font-size:14.5px; color:#c9d4ee }
+
+    /* Réseaux sociaux visibles */
+    .social{ display:flex; gap:10px; justify-content:center; margin-top:14px; flex-wrap:wrap }
+    .social a{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:36px; height:36px; border-radius:10px;
+      border:1px solid rgba(255,255,255,.25);
+      background:#2f3c55; color:#9fc0ff; text-decoration:none; font-weight:900;
+      box-shadow:0 2px 8px rgba(0,0,0,.35); transition:all .2s ease; font-size:18px;
+    }
+    .social a:hover{ background:#3a6cf0; color:#fff; transform:translateY(-2px); }
+  </style>
+</head>
+<body class="chatbot-body theme-clean about-page">
+
+  <!-- NAVBAR -->
+  <header class="site-navbar">
+    <div class="nav-inner">
+      <a class="nav-brand" href="{% url 'chatbot_page' %}">
+        <img src="{% static '/team/logo.png' %}" alt="Logo">
+        <span>SUPPORT TIC</span>
+      </a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a class="nav-link" href="{% url 'chatbot_page' %}">Accueil</a>
+        <a class="nav-link active" href="{% url 'about_page' %}">À propos</a>
+        <a class="nav-link" href="{% url 'contact_page' %}">Nous contacter</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero hero-solid">
+    <h1>À propos de nous</h1>
+    <p>Support TIC est un projet du Master 1 Data Science (UJKZ) qui apporte une aide technique et administrative 24h/24 grâce à un chatbot intelligent.</p>
+  </section>
+
+  <!-- CONTENU -->
+  <main class="page-wrap">
+    <div class="container">
+      <h2>Notre mission</h2>
+      <p>
+        Offrir des réponses simples et fiables aux besoins des étudiants : inscription, accès Wi-Fi, logiciels, dépannage,
+        accompagnement pédagogique et informations pratiques. Nous construisons une base de connaissances vivante et
+        mesurons les demandes fréquentes pour améliorer les services numériques du campus.
+      </p>
+
+      <h2>L’équipe</h2>
+      <div class="team-grid">
+
+        <!-- Membre 1 -->
+        <article class="team-card">
+          <img class="team-photo" loading="lazy" src="{% static 'team/kabreaz.jpg' %}" alt="Photo KABRE ABDOUL AZIZ">
+          <div class="team-name">KABRE ABDOUL AZIZ</div>
+          <div class="team-role">Ingénieur GL/Data Sciences</div>
+          <div class="social">
+            <a href="#" aria-label="GitHub">🐙</a>
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="X/Twitter">𝕏</a>
+            <a href="mailto:email@example.com" aria-label="Email">✉️</a>
+          </div>
+        </article>
+
+        <!-- Membre 2 -->
+        <article class="team-card">
+          <img class="team-photo" loading="lazy" src="{% static 'team/hamidou.jpg' %}" alt="Photo J. Hamidou SAWADOGO">
+          <div class="team-name">J. Hamidou SAWADOGO</div>
+          <div class="team-role">PDG de CFPI</div>
+          <div class="social">
+            <a href="#" aria-label="GitHub">🐙</a>
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="X/Twitter">𝕏</a>
+            <a href="mailto:email@example.com" aria-label="Email">✉️</a>
+          </div>
+        </article>
+
+        <!-- Membre 3 -->
+        <article class="team-card">
+          <img class="team-photo" loading="lazy" src="{% static 'team/washy.jpg' %}" alt="Photo COMPAORE Washylatou">
+          <div class="team-name">COMPAORE Washylatou</div>
+          <div class="team-role">Administratrice BD / Ingénieur GL — Documentation</div>
+          <div class="social">
+            <a href="#" aria-label="GitHub">🐙</a>
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="X/Twitter">𝕏</a>
+            <a href="mailto:email@example.com" aria-label="Email">✉️</a>
+          </div>
+        </article>
+
+        <!-- Membre 4 -->
+        <article class="team-card">
+          <img class="team-photo" loading="lazy" src="{% static 'team/placeholder.jpg' %}" alt="Photo membre">
+          <div class="team-name">Dr Arthur SAWADOGO</div>
+          <div class="team-role">Enseignant Chercheur IFOAD-UJKZ</div>
+          <div class="social">
+            <a href="#" aria-label="GitHub">🐙</a>
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="X/Twitter">𝕏</a>
+            <a href="mailto:email@example.com" aria-label="Email">✉️</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" style="background:#1b2330;">
+    <div class="footer-inner">
+      <small>&copy; <span id="year"></span> SUPPORT TIC — Projet étudiant UJKZ.</small>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

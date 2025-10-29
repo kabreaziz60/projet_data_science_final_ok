@@ -7,88 +7,66 @@
   <title>Support — Chatbot</title>
   <link rel="stylesheet" href="{% static 'chat.css' %}">
 </head>
-<body>
-  <div id="chat-widget" class="chat-closed" aria-live="polite">
-    <div class="chat-header" id="chatHeader">
-      <div class="brand">
-        <img src="{% static 'logo.png' %}" alt="Logo" class="brand-logo" onerror="this.style.display='none'">
-        <div class="brand-title">
-          <span class="title-main">SUPPORT TIC</span>
-          <small class="title-sub">Assistance & Formation</small>
+<body class="chatbot-body theme-clean">
+
+  <!-- NAVBAR -->
+  <header class="site-navbar">
+    <div class="nav-inner">
+      <a class="nav-brand" href="#">
+        <img src="{%  static '../static/team/logo.png' %}" alt="Logo">
+        <span>SUPPORT TIC</span>
+      </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a class="nav-link active" href="{% url 'chatbot_page' %}">Accueil</a>
+      <a class="nav-link" href="{% url 'about_page' %}">À propos</a>
+      <a class="nav-link" href="{% url 'contact_page' %}">Nous contacter</a>
+    </nav>
+
+    </div>
+  </header>
+
+  <!-- CONTENU PRINCIPAL -->
+  <main class="page-wrap">
+    <div id="chat-widget" class="chat-open" aria-live="polite" data-endpoint="/api/ask/">
+      <div class="chat-header" id="chatHeader">
+        <div class="brand">
+          <img src="{% static '../static/team/logo.png' %}" alt="Logo" class="brand-logo" onerror="this.style.display='none'">
+          <div class="brand-title">
+            <span class="title-main">CHATBOT SUPPORT TIC</span>
+            <small class="title-sub">Assistance & Formation</small>
+          </div>
         </div>
-      </div>
-      <button id="chatToggle" class="toggle-btn" aria-expanded="false">▶</button>
-    </div>
-
-    <div class="chat-body" id="chatBody" hidden>
-      <div class="chat-conversation" id="conversation" role="log"></div>
-
-      <div class="quick-actions" id="quickActions">
-        <button class="qa-btn">Dépannage PC</button>
-        <button class="qa-btn">Installation logiciel</button>
-        <button class="qa-btn">Accès Wi-Fi</button>
+        <button id="chatToggle" class="toggle-btn" aria-expanded="true" title="Ouvrir/fermer">💬</button>
       </div>
 
-      <form id="chatForm" class="chat-form" autocomplete="off">
-        <input id="messageInput" class="chat-input" type="text" name="question" placeholder="Tapez votre question..." aria-label="Message">
-        <button type="submit" class="send-btn">Envoyer</button>
-      </form>
+      <div class="chat-body" id="chatBody">
+        <div class="chat-conversation" id="conversation" role="log" aria-live="polite"></div>
 
-      <div class="small-print">Disponible : 7j/7 - 24h/24</div>
+        <div class="quick-actions" id="quickActions" aria-label="Actions rapides">
+          <button class="qa-btn">💻 Dépannage PC</button>
+          <button class="qa-btn">🧩 Installation logiciel</button>
+          <button class="qa-btn">📶 Accès Wi-Fi</button>
+        </div>
+
+        <form id="chatForm" class="chat-form" autocomplete="off">
+          <input id="messageInput" class="chat-input" type="text" name="question"
+                 placeholder="💬 Tapez votre question..." aria-label="Message">
+          <button type="submit" class="send-btn" title="Envoyer">🚀</button>
+        </form>
+
+        <div class="small-print">Disponible : 7j/7 – 24h/24</div>
+      </div>
     </div>
-  </div>
+  </main>
 
-  <script>
-    function getCookie(name) {
-      let v = null;
-      if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-          const c = cookies[i].trim();
-          if (c.substring(0, name.length + 1) === (name + '=')) {
-            v = decodeURIComponent(c.substring(name.length + 1));
-            break;
-          }
-        }
-      }
-      return v;
-    }
-
-    const CSRFTOKEN = getCookie('csrftoken');
-
-    document.getElementById('chatForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const messageInput = document.getElementById('messageInput');
-      const message = messageInput.value.trim();
-      if (!message) return;
-
-      fetch('/api/ask/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'X-CSRFToken': CSRFTOKEN
-        },
-        body: `message=${encodeURIComponent(message)}`
-      })
-      .then(res => res.json())
-      .then(data => {
-        const conv = document.getElementById('conversation');
-        const userMsg = `<div class="user-msg">${message}</div>`;
-        const botMsg = `<div class="bot-msg">${data.response}</div>`;
-        conv.innerHTML += userMsg + botMsg;
-        conv.scrollTop = conv.scrollHeight;
-        messageInput.value = '';
-      });
-    });
-
-    document.getElementById('chatToggle').addEventListener('click', function() {
-      const body = document.getElementById('chatBody');
-      const expanded = this.getAttribute('aria-expanded') === 'true';
-      body.hidden = expanded;
-      this.setAttribute('aria-expanded', !expanded);
-      document.getElementById('chat-widget').classList.toggle('chat-closed');
-    });
-  </script>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p id="about"><strong>À propos :</strong> Support TIC — Assistance & Formation pour votre environnement numérique.</p>
+      <p id="contact">Contact : <a href="mailto:support@example.com">support@example.com</a> · Tél : +226 00 00 00 00</p>
+      <small>&copy; <span id="year"></span> SUPPORT TIC — Tous droits réservés.</small>
+    </div>
+  </footer>
 
   <script src="{% static 'chat.js' %}"></script>
 </body>
