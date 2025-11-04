@@ -8,3 +8,4 @@ transformers  # si utilisé pour le NLP
 torch          # si utilisé pour les modèles de deep learning
 matplotlib    # si des visualisations sont nécessaires
 seaborn       # pour des visualisations statistiques avancées
+sentence-transformers
