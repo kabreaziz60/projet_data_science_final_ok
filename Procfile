@@ -1,1 +1,1 @@
-web: gunicorn monprojet.wsgi
+web: gunicorn datascience.wsgi
