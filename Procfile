@@ -1,1 +1,1 @@
-web: gunicorn datascience.wsgi
+web: gunicorn support_bot.wsgi
