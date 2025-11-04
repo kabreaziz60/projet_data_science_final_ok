@@ -1,12 +1,14 @@
 from pathlib import Path
+import os
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # === BASE DIR ===
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # === SECURITY ===
 SECRET_KEY = 'django-insecure-n=$6=hcgp4u)vt6gebvn63+*!lotnh+p-_&-gne=%-9ewi$1^2'
-DEBUG = True
-ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = ['monchatbot-service.onrender.com']
 
 # === APPLICATIONS ===
 INSTALLED_APPS = [
