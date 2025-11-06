@@ -35,7 +35,7 @@ FAQ_CSV = DATA_DIR / "faq.csv"
 # Seuil de similarité (de 0.0 à 1.0)
 # Si le score est plus bas que ça, le bot dit "Je n'ai pas compris"
 # Vous pouvez le baisser à 0.2 ou 0.3 si le bot est trop strict.
-SIMILARITY_THRESHOLD = 0.3
+SIMILARITY_THRESHOLD = 0.2
 
 # --- États Globaux (pour le cache) ---
 _lock = threading.Lock()
