@@ -1,13 +1,17 @@
 # support_bot/chatbot_engine.py
+# VERSION SIMPLIFIÉE (TF-IDF + NearestNeighbors)
+# Ce code n'utilise PAS sentence-transformers et est TRÈS LÉGER.
 from __future__ import annotations
 import logging
 import threading
 from pathlib import Path
-from typing import Optional, Tuple, List
+from typing import Optional, Tuple
 
-import numpy as np
 import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.neighbors import NearestNeighbors
 
+# --- Configuration du Logger ---
 logger = logging.getLogger(__name__)
 if not logger.handlers:
     h = logging.StreamHandler()
@@ -15,152 +19,140 @@ if not logger.handlers:
     logger.addHandler(h)
 logger.setLevel(logging.INFO)
 
-# ---- BASE_DIR (dans Django) ----
+# --- Configuration des Chemins ---
 try:
     from django.conf import settings
     BASE_DIR = Path(settings.BASE_DIR)
+    logger.info("Chargement en mode Django. BASE_DIR = %s", BASE_DIR)
 except Exception:
     BASE_DIR = Path(__file__).resolve().parents[1]  # fallback hors Django
+    logger.info("Chargement en mode non-Django. BASE_DIR = %s", BASE_DIR)
 
-# ---- Chemins projet ----
 DATA_DIR = BASE_DIR / "support_bot" / "data"
-MODEL_DIR = BASE_DIR / "support_bot" / "models"
 FAQ_CSV = DATA_DIR / "faq.csv"
-# --- CHEMINS POUR LE CLASSIFIEUR TF-IDF ---
-VEC_PATH = DATA_DIR / "vectorizer.pkl"
-CLF_PATH = DATA_DIR / "model.pkl"
 
-# ---- Imports optionnels ----
-# --- Désactivation des imports lourds ---
-HAVE_FAISS = False
-faiss = None
-SentenceTransformer = None
+# --- Constantes du Modèle ---
+# Seuil de similarité (de 0.0 à 1.0)
+# Si le score est plus bas que ça, le bot dit "Je n'ai pas compris"
+# Vous pouvez le baisser à 0.2 ou 0.3 si le bot est trop strict.
+SIMILARITY_THRESHOLD = 0.3
 
-try:
-    from sklearn.neighbors import NearestNeighbors
-    HAVE_SKLEARN = True
-except Exception:
-    HAVE_SKLEARN = False
-
-import joblib  # noqa: E402
-
-# ---- États globaux ----
+# --- États Globaux (pour le cache) ---
 _lock = threading.Lock()
 _df: Optional[pd.DataFrame] = None
+_vectorizer: Optional[TfidfVectorizer] = None
+_index: Optional[NearestNeighbors] = None
+_question_vectors = None  # C'est la matrice TF-IDF
 _init_error: Optional[Exception] = None
 
-# classifieur supervisé (TF-IDF + LogReg où la classe == réponse)
-_vec = None
-_clf = None
-CLF_THRESHOLD = 0.55  # seuil de confiance minimum
-
-# ---- Utils ----
-def _ensure_dirs():
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-    MODEL_DIR.mkdir(parents=True, exist_ok=True)
-
-def _load_classifier():
-    """Charge vectorizer + model s'ils existent (supervisé)."""
-    global _vec, _clf
-    
-    if not VEC_PATH.exists():
-        logger.warning("Fichier vectorizer.pkl introuvable ici: %s", VEC_PATH)
-        raise FileNotFoundError(f"Fichier vectorizer.pkl introuvable: {VEC_PATH}")
-        
-    if not CLF_PATH.exists():
-        logger.warning("Fichier model.pkl introuvable ici: %s", CLF_PATH)
-        raise FileNotFoundError(f"Fichier model.pkl introuvable: {CLF_PATH}")
-
-    try:
-        _vec = joblib.load(VEC_PATH)
-        _clf = joblib.load(CLF_PATH)
-        logger.info("Classifieur chargé (vectorizer.pkl + model.pkl).")
-    except Exception as e:
-        logger.exception("Échec chargement classifieur: %s", e)
-        raise e
-
-def _try_classifier(q: str) -> Tuple[Optional[str], float]:
-    """Retourne (réponse_predite, confiance) si classifieur dispo, sinon (None, 0)."""
-    if _vec is None or _clf is None or not hasattr(_clf, "predict_proba"):
-        logger.warning("Classifieur non chargé, _try_classifier échoue.")
-        return None, 0.0
-    try:
-        X = _vec.transform([q])
-        probs = _clf.predict_proba(X)[0]
-        y = _clf.classes_[int(np.argmax(probs))]
-        conf = float(np.max(probs))
-        ans = str(y).strip()
-        if ans:
-            return ans, conf
-        return None, conf
-    except Exception as e:
-        logger.warning("Classifieur: erreur prédiction (%s)", e)
-        return None, 0.0
-
 def _lazy_load():
-    """Charge FAQ/embeddings/index/modèles (thread-safe)."""
-    global _df, _init_error
+    """
+    Charge le CSV, entraîne le TfidfVectorizer et l'index NearestNeighbors.
+    Ne s'exécute qu'une seule fois au démarrage.
+    """
+    global _df, _vectorizer, _index, _question_vectors, _init_error
 
     # Vérifie si c'est déjà chargé
-    if _df is not None and _vec is not None and _clf is not None and _init_error is None:
+    if _df is not None and _index is not None:
         return
+    
     with _lock:
-        if _df is not None and _vec is not None and _clf is not None and _init_error is None:
+        # Re-vérifie à l'intérieur du 'lock' (au cas où un autre thread attendait)
+        if _df is not None and _index is not None:
             return
         
         try:
-            _ensure_dirs()
-            # 1) Lire FAQ (On en a besoin pour les réponses du classifieur)
+            logger.info("Démarrage du chargement du modèle léger (TF-IDF)...")
+            
+            # 1) Vérifier si le dossier data existe
+            if not DATA_DIR.exists():
+                raise FileNotFoundError(f"Dossier 'data' introuvable: {DATA_DIR}")
+            
+            # 2) Lire le fichier FAQ (faq.csv)
             if not FAQ_CSV.exists():
-                raise FileNotFoundError(
-                    f"Fichier FAQ introuvable: {FAQ_CSV}. Crée/pose un CSV 'question,answer'."
-                )
+                raise FileNotFoundError(f"Fichier FAQ introuvable: {FAQ_CSV}")
+            
+            logger.info("Lecture de %s...", FAQ_CSV)
             df = pd.read_csv(FAQ_CSV)
+            
+            # 3) Nettoyer les données (très important)
             if not {"question", "answer"}.issubset(df.columns):
                 raise ValueError("Le CSV doit contenir les colonnes 'question' et 'answer'.")
             
-            # ... (Nettoyage du dataframe) ...
             df = df.dropna(subset=["question", "answer"]).astype({"question": str, "answer": str})
-            df["question"] = df["question"].str.strip()
+            df["question"] = df["question"].str.strip().str.lower() # Mettre en minuscule
             df["answer"] = df["answer"].str.strip()
-            df = df[(df["question"].str.len() > 3) & (df["answer"].str.len() > 3)]
             df = df.drop_duplicates(subset=["question"]).reset_index(drop=True)
-            _df = df
-
-            # 2) Classifieur supervisé (MAINTENANT OBLIGATOIRE)
-            _load_classifier()
             
-            # 3), 4) et 5) SONT DESACTIVÉS POUR ÉCONOMISER LA RAM
-            # (sentence-transformers, embeddings, et FAISS ne sont pas chargés)
+            if len(df) == 0:
+                raise ValueError("Le fichier 'faq.csv' est valide mais vide après nettoyage.")
+            
+            _df = df
+            logger.info("CSV chargé et nettoyé: %d questions trouvées.", len(_df))
 
-            logger.info("KB prête (Mode Classifieur TF-IDF Seulement): %d entrées.", len(_df))
+            # 4) Entraîner le Vectorizer (TF-IDF)
+            logger.info("Entraînement du TfidfVectorizer...")
+            _vectorizer = TfidfVectorizer(stop_words='french') # Vous pouvez changer 'french'
+            _question_vectors = _vectorizer.fit_transform(_df["question"])
+            
+            # 5) Entraîner l'Index de recherche (NearestNeighbors)
+            logger.info("Entraînement de l'index NearestNeighbors...")
+            _index = NearestNeighbors(n_neighbors=1, metric="cosine")
+            _index.fit(_question_vectors)
+            
+            logger.info("====== CHATBOT PRÊT (Mode Léger) ======")
 
         except Exception as e:
             _init_error = e
-            logger.exception("Erreur d'initialisation chatbot: %s", e)
+            logger.exception("!!!!!! ERREUR D'INITIALISATION DU CHATBOT !!!!!!: %s", e)
 
 # ---- API publique ----
 def get_chatbot_response(user_input: str) -> str:
-    """Modifié: utilise UNIQUEMENT le classifieur supervisé (TF-IDF)."""
+    """
+    Prend une question, la vectorise, et trouve la réponse la plus proche.
+    """
     try:
         q = (user_input or "").strip()
         if not q:
             return "Pouvez-vous préciser votre question ?"
 
+        # Charge le modèle s'il n'est pas encore en mémoire
         _lazy_load()
-        if _init_error:
-            # Si _load_classifier a échoué (ex: fichiers .pkl absents)
-            logger.error("Erreur lazy_load: %s", _init_error)
-            return f"Le chatbot n'est pas prêt: {_init_error}"
 
-        # 1) Classifieur (Seule méthode)
-        ans, conf = _try_classifier(q)
+        # Si le chargement a échoué (ex: faq.csv non trouvé)
+        if _init_error:
+            logger.error("Erreur lazy_load: %s", _init_error)
+            # Affiche l'erreur à l'utilisateur pour le débogage
+            return f"Le chatbot n'est pas prêt: {_init_error}"
         
-        if ans and conf >= CLF_THRESHOLD:
-            return ans
+        # Si les modèles ne sont pas chargés pour une raison inconnue
+        if _vectorizer is None or _index is None or _df is None:
+            logger.error("Composants du chatbot non initialisés.")
+            return "Désolé, le chatbot n'est pas correctement initialisé."
+
+        # 1. Transformer la question de l'utilisateur
+        q_vec = _vectorizer.transform([q.lower()]) # Mettre en minuscule aussi
+
+        # 2. Chercher la question la plus proche dans l'index
+        distances, idxs = _index.kneighbors(q_vec, n_neighbors=1)
+        
+        match_index = idxs[0][0]
+        match_distance = distances[0][0]
+        
+        # 'distance' est la distance cosinus (0 = identique, 1 = opposé)
+        # 'similarité' est l'inverse (1 = identique, 0 = opposé)
+        match_similarity = 1.0 - match_distance
+
+        # 3. Vérifier si la similarité est suffisante
+        if match_similarity >= SIMILARITY_THRESHOLD:
+            answer = _df.iloc[match_index]["answer"]
+            # Optionnel : logguer le match
+            # matched_q = _df.iloc[match_index]["question"]
+            # logger.info("Match (Conf: %.2f): '%s' -> '%s'", match_similarity, q, matched_q)
+            return str(answer)
         else:
-            # 2) Fallback (Réponse par défaut)
-            logger.info("Réponse non trouvée (confiance: %.2f)", conf)
+            # 4. Réponse si le score est trop bas
+            logger.info("Aucun match (Meilleur score: %.2f < %.2f)", match_similarity, SIMILARITY_THRESHOLD)
             return "Je n'ai pas bien compris votre question. Pouvez-vous la reformuler différemment ?"
 
     except Exception as e:
@@ -168,13 +160,19 @@ def get_chatbot_response(user_input: str) -> str:
         return "Désolé, une erreur s'est produite. Réessayez ou reformulez votre question."
 
 def reload_kb() -> str:
-    """Forcer le rechargement (après mise à jour de faq.csv / modèles)."""
-    global _df, _init_error, _vec, _clf
+    """Forcer le rechargement (après mise à jour de faq.csv)."""
+    global _df, _vectorizer, _index, _question_vectors, _init_error
     with _lock:
         _df = None
+        _vectorizer = None
+        _index = None
+        _question_vectors = None
         _init_error = None
-        _vec = None
-        _clf = None
+    
+    logger.info("Forçage du rechargement de la base de connaissances...")
     _lazy_load()
-    return "Rechargé (Mode TF-IDF)." if _init_error is None else f"Échec: {_init_error}"
+    
+    if _init_error:
+        return f"Échec du rechargement: {_init_error}"
+    return "Base de connaissances (TF-IDF) rechargée."
 # ---- Fin du module chatbot_engine.py ----
