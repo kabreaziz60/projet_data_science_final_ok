@@ -50,12 +50,12 @@ try:
 except Exception:
     HAVE_SKLEARN = False
 
-import joblib
+import joblib  # noqa: E402
 
 # ---- États globaux ----
 _lock = threading.Lock()
 _df: Optional[pd.DataFrame] = None
-_model_st: Optional[SentenceTransformer] = None
+_model_st: Optional[SentenceTransformer] = None # type: ignore
 _index = None  # FAISS ou NearestNeighbors
 _init_error: Optional[Exception] = None
 
