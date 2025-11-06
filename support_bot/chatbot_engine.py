@@ -92,7 +92,7 @@ def _lazy_load():
 
             # 4) Entraîner le Vectorizer (TF-IDF)
             logger.info("Entraînement du TfidfVectorizer...")
-            _vectorizer = TfidfVectorizer(stop_words='french') # Vous pouvez changer 'french'
+            _vectorizer = TfidfVectorizer(stop_words=None) # Vous pouvez changer 'french'
             _question_vectors = _vectorizer.fit_transform(_df["question"])
             
             # 5) Entraîner l'Index de recherche (NearestNeighbors)
