@@ -528,7 +528,46 @@ p, span, strong, small, div {
   color: inherit !important;
 }
 
+f/* ===============================
+   css pour afooter
+   =============================== */
 
+/* --- CODE POUR RÉDUIRE LE FOOTER --- */
+
+/* Cible la balise <footer> 
+(Si votre footer est un <div> avec une classe, changez 'footer' par '.nom-de-votre-classe')
+*/
+footer {
+    padding: 1.5rem 1rem; /* J'ai réduit le padding (l'espace intérieur) */
+    text-align: center;
+    border-top: 1px solid #e5e7eb; /* Une petite ligne de séparation */
+    background-color: #f9fafb; /* Un fond gris très clair */
+}
+
+/* Cible les paragraphes (lignes de texte) dans le footer */
+footer p {
+    margin: 0.25rem 0; /* Espace très réduit entre les lignes */
+    font-size: 0.875rem; /* Taille de police réduite (14px) */
+    color: #6b7280; /* Couleur de texte gris moyen */
+}
+
+/* Cible le dernier paragraphe (le copyright) pour le rendre encore plus petit */
+footer p:last-child {
+    font-size: 0.75rem; /* Taille de police très petite (12px) */
+    color: #9ca3af; /* Couleur de texte gris clair */
+}
+
+/* Cible les liens dans le footer (comme l'email) */
+footer a {
+    color: #4b5563; /* Couleur de lien sobre */
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* --- FIN DU CODE FOOTER --- */
 
 /* ===============================
    css pour contact.html
